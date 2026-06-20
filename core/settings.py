@@ -140,6 +140,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
-
 FILE_UPLOAD_MAX_MEMORY_SIZE = 1000000 # 1MB
+
+AUTH_USER_MODEL = 'accounts.User'
 
