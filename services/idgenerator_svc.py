@@ -2,4 +2,4 @@ import uuid
 
 
 def generate_id():
-    return uuid.uuid4().hex[:6]
+    return uuid.uuid4().hex[:8].upper()
