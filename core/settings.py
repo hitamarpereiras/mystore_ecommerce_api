@@ -32,6 +32,8 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'django-filters',
+
+    'apps.acconts'
 ]
 
 MIDDLEWARE = [
