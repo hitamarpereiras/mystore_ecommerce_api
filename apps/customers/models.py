@@ -36,6 +36,10 @@ class Customer(models.Model):
         null=True,
         verbose_name='Moedas de troca'
     )
+    premium = models.BooleanField(
+        default=False,
+        verbose_name='Cliente Premium'
+    )
     avatar_url = models.URLField(
         blank=True,
         null=True,
