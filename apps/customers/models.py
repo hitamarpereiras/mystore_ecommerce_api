@@ -9,16 +9,6 @@ class Customer(models.Model):
         related_name='customer',
         verbose_name='Cliente'
     )
-    name = models.CharField(
-        max_length=100, 
-        verbose_name='Nome'
-    )
-    phone = models.CharField(
-        max_length=15,
-        blank=True,
-        null=True,
-        verbose_name='Telefone'
-    )
     address = models.TextField(
         max_length=200,
         blank=True,

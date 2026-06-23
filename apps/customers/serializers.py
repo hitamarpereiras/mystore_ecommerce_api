@@ -7,8 +7,9 @@ class RegisterCustomerSerializer(serializers.Serializer):
     email = serializers.EmailField()
     password = serializers.CharField(write_only=True)
 
-    name = serializers.CharField()
-    phone = serializers.CharField(required=False, allow_blank=True)
+    first_name = serializers.CharField()
+    last_name = serializers.CharField()
+    telephone = serializers.CharField(required=False, allow_blank=True)
     address = serializers.CharField(required=False, allow_blank=True)
     house_number = serializers.CharField(required=False, allow_blank=True)
     coins = serializers.IntegerField(required=False, allow_null=True)
@@ -23,8 +24,9 @@ class CustomerSerializer(serializers.ModelSerializer):
         model = Customer
         fields = [
             'id',
-            'name',
-            'phone',
+            'first_name',
+            'last_name',
+            'telephone',
             'address',
             'house_number',
             'coins',
