@@ -1,7 +1,7 @@
 from django.db import transaction
 from rest_framework.exceptions import ValidationError
 from apps.customers.models import Customer
-from apps.users.models import User
+from apps.accounts.models import User
 
 from services import (
     validators,
@@ -19,23 +19,27 @@ class CustomerService:
         #Cria User + Customer, processa imagem e atualiza os campos adicionais
         
         image = validated_data.pop("image", None)
-        username = validated_data.pop("username")
-        email = validated_data.pop("email")
+        email = validated_data.pop("email").strip().lower()
         password = validated_data.pop("password")
+        first_name = validated_data.pop("first_name").strip().title()
+        last_name = validated_data.pop("last_name").strip().title()
+        telephone = validated_data.pop("telephone", None)
+
+        if telephone:
+            telephone = telephone.strip()
 
         # Verifica o Email
         if User.objects.filter(email=email).exists():
-            raise ValidationError("Esse email já esta em uso!")
-        
-        # Verifica o username
-        if User.objects.filter(username=username).exists():
-            raise ValidationError("Esse username já existe!")
+            raise ValidationError("Esse email já esta cadastrado!")
 
         # Criar User
         user = User.objects.create_user(
-            username=username,
+            username=email,
             email=email,
-            password=password
+            password=password,
+            first_name=first_name,
+            last_name=last_name,
+            telephone=telephone
         )
 
         # Criar Customer
