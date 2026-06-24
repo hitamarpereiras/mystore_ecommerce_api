@@ -3,7 +3,7 @@ from apps.customers.models import Customer
 
 
 class RegisterCustomerSerializer(serializers.Serializer):
-    username = serializers.CharField()
+
     email = serializers.EmailField()
     password = serializers.CharField(write_only=True)
 
@@ -18,6 +18,11 @@ class RegisterCustomerSerializer(serializers.Serializer):
 
 
 class CustomerSerializer(serializers.ModelSerializer):
+
+    first_name = serializers.CharField(source='user.first_name', read_only=True)
+    last_name = serializers.CharField(source='user.last_name', read_only=True)
+    telephone = serializers.CharField(source='user.telephone', read_only=True)
+
     image = serializers.ImageField(required=False, write_only=True)
 
     class Meta:
