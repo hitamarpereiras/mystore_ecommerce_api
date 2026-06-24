@@ -9,3 +9,6 @@ def generate_idStore():
 
 def generate_idProduct():
     return uuid.uuid4().hex[:14].lower()
+
+def generate_OrderCode():
+    return uuid.uuid4().hex[:15].lower()
