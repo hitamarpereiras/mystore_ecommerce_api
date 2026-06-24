@@ -5,9 +5,10 @@ from apps.products.models import Product
 import json
 
 
+# Baixar o estoque altomaticamente
+
 @receiver(pre_save, sender=Order)
 def update_product_stock(sender, instance, **kwargs):
-
 
     # Se não esxistir no banco ignora
     if not instance.pk:
