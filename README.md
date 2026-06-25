@@ -110,9 +110,50 @@ Resposta esperada:
 
 > Para chamadas protegidas, envie o cabeçalho `Authorization: Bearer <token>`.
 
+## Paginação
+
+A API implementa paginação automática para endpoints de listagem:
+
+- **Paginação padrão** (aplicada globalmente): `50` itens por página
+- **Paginação customizada para Produtos**: `14` itens por página (máx: 28)
+- **Paginação customizada para Pedidos**: `20` itens por página (máx: 40)
+
+### Usar paginação
+
+Adicione o parâmetro `page` para navegar entre páginas:
+
+```
+GET /api/v1/products/?page=1
+GET /api/v1/orders/?page=2
+```
+
+### Customizar tamanho da página
+
+Use o parâmetro `page_size` para ajustar o número de itens (até o limite máximo):
+
+```
+GET /api/v1/products/?page=1&page_size=20
+GET /api/v1/orders/?page=1&page_size=30
+```
+
+**Resposta paginada:**
+
+```json
+{
+  "count": 150,
+  "next": "http://localhost:8000/api/v1/products/?page=2",
+  "previous": null,
+  "results": [...]
+}
+```
+
 ## Recursos disponíveis
 
-### Accounts
+<div style="background-color: #4a4593; padding: 10px; border-radius: 5px; margin: 10px 0;">
+
+### 1. Accounts
+
+</div>
 
 - **GET** `/api/v1/accounts/` — lista usuários (apenas para superusuários ou usuário próprio).
 - **GET** `/api/v1/accounts/{id}/` — recuperar usuário.
@@ -129,7 +170,11 @@ Campos relevantes:
 - `is_active`
 - `telephone`
 
-### Customers
+<div style="background-color: #4a4593; padding: 10px; border-radius: 5px; margin: 10px 0;">
+
+### 2. Customers
+
+</div>
 
 - **POST** `/api/v1/customers/register/` — registrar cliente.
 - **GET** `/api/v1/customers/` — lista cliente(s) do usuário autenticado.
@@ -150,7 +195,11 @@ Campos relevantes:
 - `avatar_url`
 - `avatar_path`
 
-### Stores
+<div style="background-color: #4a4593; padding: 10px; border-radius: 5px; margin: 10px 0;">
+
+### 3. Stores
+
+</div>
 
 - **GET** `/api/v1/stores/` — lista lojas. Público para `list` e `retrieve`.
 - **GET** `/api/v1/stores/{id}/` — recuperar loja.
@@ -173,7 +222,11 @@ Campos relevantes:
 - `other_url`
 - `color_palette`
 
-### Categories
+<div style="background-color: #4a4593; padding: 10px; border-radius: 5px; margin: 10px 0;">
+
+### 4. Categories
+
+</div>
 
 - **GET** `/api/v1/categories/` — listar categorias. Público.
 - **GET** `/api/v1/categories/{id}/` — recuperar categoria. Público.
@@ -188,7 +241,11 @@ Campos relevantes:
 - `name`
 - `description`
 
-### Products
+<div style="background-color: #4a4593; padding: 10px; border-radius: 5px; margin: 10px 0;">
+
+### 5. Products
+
+</div>
 
 - **GET** `/api/v1/products/` — lista produtos.
 - **GET** `/api/v1/products/{id}/` — recuperar produto.
@@ -221,8 +278,14 @@ Campos relevantes:
 - `crop_height`
 
 > O campo `image` é aceito como `multipart/form-data` na criação/atualização, mas é removido antes da persistência.
+> 
+> A listagem de produtos suporta **paginação** com `14` itens por página (máx: 28).
 
-### Orders
+<div style="background-color: #4a4593; padding: 10px; border-radius: 5px; margin: 10px 0;">
+
+### 6. Orders
+
+</div>
 
 - **GET** `/api/v1/orders/` — lista pedidos do cliente autenticado.
 - **GET** `/api/v1/orders/{id}/` — recuperar pedido.
@@ -260,6 +323,7 @@ Cada item deve conter ao menos:
 
 - `id`: ID do produto
 - `name`: nome do produto
+- `price`: valor do produto
 - `quantity`: quantidade do produto
 
 Exemplo válido:
@@ -269,11 +333,13 @@ Exemplo válido:
   {
     "id": 1,
     "name": "Camiseta",
+    "price": 45.00,
     "quantity": 2
   },
   {
     "id": 4,
     "name": "Caneca",
+    "price": 12.90,
     "quantity": 1
   }
 ]
