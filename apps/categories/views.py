@@ -26,3 +26,6 @@ class CategoryViewSet(ModelViewSet):
             return Category.objects.all().order_by('-updated_at')
         
         return Category.objects.filter(owner=user).order_by('-updated_at')
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
