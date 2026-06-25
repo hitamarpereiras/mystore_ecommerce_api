@@ -11,6 +11,6 @@ class AccountViewSet(ModelViewSet):
         user = self.request.user
 
         if user.is_superuser:
-            return User.objects.all().order_by('-created_at')
+            return User.objects.all().order_by('-id')
 
-        return User.objects.filter(user=user).order_by('-created_at')
+        return User.objects.filter(user=user).order_by('-id')

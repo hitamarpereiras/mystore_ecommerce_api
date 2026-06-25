@@ -1,0 +1,958 @@
+{
+  "info": {
+    "name": "Ecommerce API - Postman Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Coleção de endpoints para testar a API Ecommerce via Postman. Use {{baseUrl}} e {{access_token}}."
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8000/api/v1",
+      "type": "string"
+    },
+    {
+      "key": "access_token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Obter Token JWT",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"seu-email@example.com\",\n  \"password\": \"sua-senha\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/authentication/token/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "authentication",
+                "token",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "Refresh Token",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refresh\": \"{{refresh_token}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/authentication/token/refresh/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "authentication",
+                "token",
+                "refresh",
+                ""
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Accounts",
+      "item": [
+        {
+          "name": "Listar Accounts",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/accounts/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "accounts",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "Criar Account",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"novo-usuario@example.com\",\n  \"first_name\": \"Nome\",\n  \"last_name\": \"Sobrenome\",\n  \"telephone\": \"(11) 99999-9999\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/accounts/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "accounts",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "Detalhar Account",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/accounts/:id/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "accounts",
+                ":id",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "Atualizar Account",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"first_name\": \"Nome Atualizado\",\n  \"last_name\": \"Sobrenome Atualizado\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/accounts/:id/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "accounts",
+                ":id",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "Excluir Account",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/accounts/:id/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "accounts",
+                ":id",
+                ""
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Customers",
+      "item": [
+        {
+          "name": "Registrar Cliente",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"cliente@example.com\",\n  \"password\": \"senha123\",\n  \"first_name\": \"Nome\",\n  \"last_name\": \"Sobrenome\",\n  \"telephone\": \"(11) 98888-7777\",\n  \"address\": \"Rua Exemplo, 123\",\n  \"house_number\": \"123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/customers/register/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "customers",
+                "register",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "Listar Customers",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/customers/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "customers",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "Detalhar Customer",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/customers/:id/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "customers",
+                ":id",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "Atualizar Customer",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"address\": \"Rua Atualizada, 456\",\n  \"telephone\": \"(11) 97777-6666\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/customers/:id/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "customers",
+                ":id",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "Excluir Customer",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/customers/:id/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "customers",
+                ":id",
+                ""
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Stores",
+      "item": [
+        {
+          "name": "Listar Stores",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/stores/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "stores",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "Criar Store",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "Loja Exemplo",
+                  "type": "text"
+                },
+                {
+                  "key": "phone",
+                  "value": "(11) 99999-9999",
+                  "type": "text"
+                },
+                {
+                  "key": "address",
+                  "value": "Av. Exemplo, 100",
+                  "type": "text"
+                },
+                {
+                  "key": "cnpj",
+                  "value": "12.345.678/0001-99",
+                  "type": "text"
+                },
+                {
+                  "key": "instagram_url",
+                  "value": "https://instagram.com/loja",
+                  "type": "text"
+                },
+                {
+                  "key": "facebook_url",
+                  "value": "https://facebook.com/loja",
+                  "type": "text"
+                },
+                {
+                  "key": "other_url",
+                  "value": "https://loja.com.br",
+                  "type": "text"
+                },
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": "<selecione o arquivo de imagem>"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/stores/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "stores",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "Detalhar Store",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/stores/:id/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "stores",
+                ":id",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "Atualizar Store",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "Loja Atualizada",
+                  "type": "text"
+                },
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": "<selecione o arquivo de imagem>"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/stores/:id/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "stores",
+                ":id",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "Excluir Store",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/stores/:id/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "stores",
+                ":id",
+                ""
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Categories",
+      "item": [
+        {
+          "name": "Listar Categories",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/categories/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "categories",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "Criar Category",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Categoria Exemplo\",\n  \"description\": \"Descrição da categoria\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/categories/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "categories",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "Detalhar Category",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/categories/:id/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "categories",
+                ":id",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "Atualizar Category",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"Descrição atualizada\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/categories/:id/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "categories",
+                ":id",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "Excluir Category",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/categories/:id/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "categories",
+                ":id",
+                ""
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Products",
+      "item": [
+        {
+          "name": "Listar Products",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/products/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "products",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "Criar Product",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "store",
+                  "value": "<store-id>",
+                  "type": "text"
+                },
+                {
+                  "key": "name",
+                  "value": "Produto Exemplo",
+                  "type": "text"
+                },
+                {
+                  "key": "category",
+                  "value": "<category-id>",
+                  "type": "text"
+                },
+                {
+                  "key": "description",
+                  "value": "Descrição do produto",
+                  "type": "text"
+                },
+                {
+                  "key": "price",
+                  "value": "49.90",
+                  "type": "text"
+                },
+                {
+                  "key": "stock",
+                  "value": "10",
+                  "type": "text"
+                },
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": "<selecione o arquivo de imagem>"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/products/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "products",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "Detalhar Product",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/products/:id/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "products",
+                ":id",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "Atualizar Product",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "price",
+                  "value": "59.90",
+                  "type": "text"
+                },
+                {
+                  "key": "stock",
+                  "value": "20",
+                  "type": "text"
+                },
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": "<selecione o arquivo de imagem>"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/products/:id/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "products",
+                ":id",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "Excluir Product",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/products/:id/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "products",
+                ":id",
+                ""
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Orders",
+      "item": [
+        {
+          "name": "Listar Orders",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/orders/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "orders",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "Criar Order",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"store\": \"<store-id>\",\n  \"customer\": \"<customer-id>\",\n  \"name_customer\": \"Cliente Exemplo\",\n  \"phone\": \"(11) 98888-9999\",\n  \"address\": \"Rua Pedido, 123\",\n  \"house_number\": \"123\",\n  \"subtotal\": \"100.00\",\n  \"total\": \"110.00\",\n  \"remaining\": \"0.00\",\n  \"payment_method\": \"Cartão\",\n  \"rate_delivery\": \"10.00\",\n  \"itens\": [{\n    \"product\": \"<product-id>\",\n    \"quantity\": 1,\n    \"price\": 100.00\n  }]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/orders/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "orders",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "Detalhar Order",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/orders/:id/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "orders",
+                ":id",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "Atualizar Order",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/orders/:id/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "orders",
+                ":id",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "Excluir Order",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/orders/:id/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "orders",
+                ":id",
+                ""
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
