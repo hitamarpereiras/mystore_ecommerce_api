@@ -11,6 +11,8 @@ class Category(models.Model):
         )
         store = models.ForeignKey(
             Store,
+            null=True,
+            blank=True,
             on_delete=models.PROTECT,
             related_name='store',
             verbose_name='Loja'
