@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from apps.stores.models import Store
 
 class Category(models.Model):
         owner = models.ForeignKey(
@@ -7,6 +8,12 @@ class Category(models.Model):
             on_delete=models.PROTECT,
             related_name='categories',
             verbose_name='Proprietário'
+        )
+        store = models.ForeignKey(
+            Store,
+            on_delete=models.PROTECT,
+            related_name='store',
+            verbose_name='Loja'
         )
         name = models.CharField(
             max_length=50,

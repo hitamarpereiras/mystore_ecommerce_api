@@ -11,13 +11,8 @@ class CategoryViewSet(ModelViewSet):
     serializer_class = CategorySerializer
     permission_classes = [IsAuthenticated]
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['name', 'owner']
+    filterset_fields = ['name', 'owner', 'store']
     
-    def get_permissions(self):
-        if self.action in ['list', 'retrieve']:
-            return [AllowAny()]
-        
-        return [IsAuthenticated()]
 
     def get_queryset(self):
         user = self.request.user
