@@ -238,8 +238,11 @@ Campos relevantes:
 
 - `id`
 - `owner`
+- `store` — loja à qual a categoria pertence
 - `name`
 - `description`
+
+> O campo `store` em `categories` deve referenciar a loja atualmente acessada.
 
 <div style="background-color: #4a4593; padding: 10px; border-radius: 5px; margin: 10px 0;">
 
