@@ -7,6 +7,7 @@ class CategorySerializer(ModelSerializer):
         fields = [
             'id',
             'owner',
+            'store',
             'name',
             'description',
         ]

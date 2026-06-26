@@ -7,8 +7,8 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = [
         'id',
         'owner',
+        'store',
         'name',
-        'description',
         'created_at'
     ]
     list_filter = [
@@ -18,4 +18,5 @@ class CategoryAdmin(admin.ModelAdmin):
     search_fields = [
         'name',
         'owner',
+        'store'
     ]
