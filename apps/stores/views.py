@@ -40,9 +40,6 @@ class StoreViewSet(ModelViewSet):
     def get_queryset(self):
         user = self.request.user
 
-        if user.is_superuser:
-            return Store.objects.all().order_by('-created_at')
-
         return Store.objects.filter(owner=user).order_by('-created_at')
 
 
