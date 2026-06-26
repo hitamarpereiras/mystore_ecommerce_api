@@ -21,7 +21,7 @@ class ProductSerializer(serializers.ModelSerializer):
             'image_url',
             'image_path',
             'created_at',
-            'updated_at'
+            'updated_at',
             'crop_x',
             'crop_y',
             'crop_width',
