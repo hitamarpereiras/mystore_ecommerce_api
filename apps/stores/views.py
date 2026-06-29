@@ -38,9 +38,10 @@ class StoreViewSet(ModelViewSet):
         return [IsAuthenticated()]
 
     def get_queryset(self):
-        user = self.request.user
+        if self.action in ['list', 'retrieve']:
+            return Store.objects.all().order_by('-created_at')
 
-        return Store.objects.filter(owner=user).order_by('-created_at')
+        return Store.objects.filter(owner=self.request.user).order_by('-created_at')
 
 
     def create(self, request, *args, **kwargs):
